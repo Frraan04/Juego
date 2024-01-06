@@ -1,0 +1,53 @@
+import pygame
+import sys
+
+# Inicializar Pygame
+pygame.init()
+
+# Configuración de la pantalla
+width, height = 800, 600
+screen = pygame.display.set_mode((width, height))
+pygame.display.set_caption("Juego de Cambio de Posición")
+
+# Colores
+black = (0, 0, 0)
+white = (255, 255, 255)
+
+# Posición inicial
+x_position = width // 2
+y_position = height // 2
+
+# Velocidad de movimiento
+speed = 5
+
+def juego_cambio_posicion():
+    global x_position, y_position
+
+    while True:
+        # Manejo de eventos
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT:
+                    x_position -= speed
+                elif event.key == pygame.K_RIGHT:
+                    x_position += speed
+                elif event.key == pygame.K_UP:
+                    y_position -= speed
+                elif event.key == pygame.K_DOWN:
+                    y_position += speed
+
+        # Limpiar pantalla
+        screen.fill(black)
+
+        # Dibujar objeto en la nueva posición
+        pygame.draw.rect(screen, white, (x_position, y_position, 50, 50))
+
+        # Actualizar la pantalla
+        pygame.display.flip()
+
+if __name__ == "__main__":
+    juego_cambio_posicion()
